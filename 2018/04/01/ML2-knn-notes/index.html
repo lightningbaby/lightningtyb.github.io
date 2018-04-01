@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="ML notes," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="概述&amp;emsp;&amp;emsp;k近邻法（k-nearest neighbor,k-NN）是一种基本分类与回归方法。&amp;emsp;&amp;emsp;给定一个训练数据集，对新的输入实例，在训练数据集中找到与该实例最邻近的k个实例，这k个实例的多数属于某个类，就把该输入实例分为这个类。">
+<meta name="keywords" content="ML notes">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ML2-knn notes">
+<meta property="og:url" content="http://yoursite.com/2018/04/01/ML2-knn-notes/index.html">
+<meta property="og:site_name" content="Lightningbaby">
+<meta property="og:description" content="概述&amp;emsp;&amp;emsp;k近邻法（k-nearest neighbor,k-NN）是一种基本分类与回归方法。&amp;emsp;&amp;emsp;给定一个训练数据集，对新的输入实例，在训练数据集中找到与该实例最邻近的k个实例，这k个实例的多数属于某个类，就把该输入实例分为这个类。">
+<meta property="og:image" content="http://yoursite.com/images/features_zone_classfy.png">
+<meta property="og:image" content="http://yoursite.com/images/kd_tree.png">
+<meta property="og:updated_time" content="2018-04-01T10:16:24.087Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ML2-knn notes">
+<meta name="twitter:description" content="概述&amp;emsp;&amp;emsp;k近邻法（k-nearest neighbor,k-NN）是一种基本分类与回归方法。&amp;emsp;&amp;emsp;给定一个训练数据集，对新的输入实例，在训练数据集中找到与该实例最邻近的k个实例，这k个实例的多数属于某个类，就把该输入实例分为这个类。">
+<meta name="twitter:image" content="http://yoursite.com/images/features_zone_classfy.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/01/ML2-knn-notes/"/>
+
+
+
+
+
+  <title>ML2-knn notes | Lightningbaby</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lightningbaby</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Lightningbaby's blog</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/01/ML2-knn-notes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="汤圆宝">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lightningbaby">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ML2-knn notes</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-01T17:17:44+08:00">
+                2018-04-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>&emsp;&emsp;k近邻法（k-nearest neighbor,k-NN）是一种基本分类与回归方法。<br>&emsp;&emsp;给定一个训练数据集，对新的输入实例，在训练数据集中找到与该实例最邻近的k个实例，这k个实例的多数属于某个类，就把该输入实例分为这个类。<br><a id="more"></a></p>
+<h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h3><p> 输入：训练数据集</p>
+<script type="math/tex; mode=display">
+T=\{(x_1,y_1),(x_2,y_2),..,(x_N,y_N)\}</script><p> 其中，$x_i \in X \subseteq R^n$为实例的特征向量，$y_i \in Y=\{c_1,c_2,…,c_k\}$为实例的类别，$i=1,2,…,N$；实例特征向量x;<br> 输出：实例$x$所属的类$y$<br> （1）根据给定的距离度量，在训练集T中寻找出距离x最近的k个点，涵盖这k的点的领域记作$N_k(x)$；<br> （2）在$N_k(x)$中根据分类决策规则（eg:多数表决），确定x所属的类别y：<br>  \begin{equation}<br>y=arg \max_{c_j} \sum_{x_i \in N_k(x)} I(y_i=c_i), i=1,2,…,K<br> \end{equation}<br> 其中，$I$为指示函数，即当$y_i=c_i时I为1，否则I为0$。<br> 特殊情况是$k=1$的情形，称为最近邻算法。</p>
+<h4 id="k近邻模型"><a href="#k近邻模型" class="headerlink" title="k近邻模型"></a>k近邻模型</h4><p> &emsp;&emsp;k近邻法的模型对应于特征空间的划分。模型由三个基本要素—距离度量、k值的选择和分类决策规则决定。</p>
+<h4 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h4><p>&emsp;&emsp;当上述三个要素确定后，对于任何一个新的输入实例，所属的类唯一地确定。<br>&emsp;&emsp;特征空间中，对每个训练实例点$x_i$，距离该点比其他店更近的所有点组成的一个区域，叫做单元（cell）。每个训练实例点拥有一个单元，所有训练实例点的单元构成对特征空间的一个划分。最近邻法将实例$x_i$的类$y_i$作为其单元中所有点的类标记（class label）。则每个单元的实例点的类别是确定的。</p>
+<h4 id="距离度量"><a href="#距离度量" class="headerlink" title="距离度量"></a>距离度量</h4><p>&emsp;&emsp;特征空间中两个实例点的距离是这两个实例点相似度的反映。k近邻模型的特征空间一般是n维实数向量空间$R^n$。使用的距离是欧式距离，也可以是其他距离，比如更一般的$L_P$距离（$L_P$ distance）或Minkowski距离。<br>&emsp;&emsp;设特征空间X是n维实数向量空间$R^n$，$x_i,x_j \in X,<br>x_i=(x_i^{(1)},x_i^{(2)},…,x_i^{(n)})^T$，<br>$x_j=(x_j^{(1)},x_j^{(2)},…,x_j^{(n)})^T$，$x_i,x_j的L_P距离定义为：$<br>  \begin{equation}<br>L_P(x_i,x_j)=\lgroup \sum_{l=1}^n |x_i^{(l)}-x_j^{(l)}|^p\rgroup ^{\frac{1}{p}}<br> \end{equation}<br> 当$p \ge 1。当p=2$时，称为Euclidean distance，即<br>  \begin{equation}<br>L_2(x_i,x_j)=\lgroup \sum_{l=1}^n |x_i^{(l)}-x_j^{(l)}|^2\rgroup ^{\frac{1}{2}}<br> \end{equation}<br> 当$p =1$时，称为Manhattan distance，即<br>  \begin{equation}<br>L_1(x_i,x_j)= \sum_{l=1}^n |x_i^{(l)}-x_j^{(l)}|<br> \end{equation}<br> 当$p=\infty$时，是各个坐标距离的最大值，即<br>   \begin{equation}<br>L_\infty(x_i,x_j)= \max_{l}|x_i^{(l)}-x_j^{(l)}|<br> \end{equation} </p>
+<h4 id="k值的选择"><a href="#k值的选择" class="headerlink" title="k值的选择"></a>k值的选择</h4><p>&emsp;&emsp;k值的选择会对k近邻法的结果产生重大影响。<br>&emsp;&emsp;如果选择较小的k值，相当于用较小的邻域中的训练实例进行预测，学习的近似误差（approximation error）会减小，只有与输入实例较近的（相似的）训练实例才会对预测结果起作用。但缺点是学习的估计误差（estimation error）会增大，预测结果会对近邻的实例点非常敏感。k值的减小意味着整体模型变得负责，容易发生过拟合。<br>&emsp;&emsp;如果k值较大，相当于用较大邻域里的训练实例进行预测。优点是可以减少学习的估计误差，但缺点就是会增大近似误差。这是与输入实例较远的（不太相似）的训练实例也会对预测起作用，是预测发生错误。k值的增大意味着模型变得更简单。<br>&emsp;&emsp;如果k=N，则将输入实例预测为训练实例中最多的类。即模型过于简单，完全忽略了训练实例中的大量有用信息，不可取。<br>&emsp;&emsp;实际应用中，k值一般去一个比较小的数值。通常常采用交叉验证法（将原始数据(dataset)进行分组,一部分做为训练集(train set),另一部分做为验证集(validation set or test set),首先用训练集对分类器进行训练,再利用验证集来测试训练得到的模型(model),以此来做为评价分类器的性能指标）来选取最优值。</p>
+<h4 id="分类决策规则"><a href="#分类决策规则" class="headerlink" title="分类决策规则"></a>分类决策规则</h4><p>&emsp;&emsp;多用是<strong>多数表决</strong>，即由输入实例的k个近邻的训练实例中的多数类决定输入实例的类。多数表决的规则等价于经验风险最小化。</p>
+<h4 id="k近邻法的实现：kd树"><a href="#k近邻法的实现：kd树" class="headerlink" title="k近邻法的实现：kd树"></a>k近邻法的实现：kd树</h4><p>&emsp;&emsp;实现的过程中，主要的问题是如何对训练数据进行快速k近邻搜索。这在特征空间的维数大，及训练数据容量大时尤其必要。<br>&emsp;&emsp;最简单的方法是线性扫描（linear scan）。需要计算输入实例与每一个训练实例的距离。当训练集很大时，计算非常耗时，不可取。<br>&emsp;&emsp;为了改善，可以使用特殊的结构存储训练数据，比如kd树（kd tree）。</p>
+<h5 id="构造kd树"><a href="#构造kd树" class="headerlink" title="构造kd树"></a>构造kd树</h5><p><strong>例：</strong>给定一个二维空间的数据集：<br>\begin{equation}<br>T=\{(2,3)^T,(5,4)^T,(9,6)^T,(4,7)^T,(8,1)^T,(7,2)^T\}<br>\end{equation}<br>构造一个平衡kd树。<br><strong>解：</strong></p>
+<ul>
+<li>根节点对应包含数据集T的矩形，选择$x^{(1)}$轴，6个数据点的$x^{(1)}$坐标中位数是7，以平面$x^{(1)}=7$将空分为左右两个子矩形（子节点）；</li>
+<li>左矩形以$x^{(2)}=4$分为两个子矩形，右矩形以$x^{(2)}=6$分为两个子矩形；<br>如此递归，最后得到如下图所示的特征空间划分和kd树。</li>
+</ul>
+<p><img src="/images/features_zone_classfy.png" alt=""><br><img src="/images/kd_tree.png" alt=""></p>
+<h5 id="搜索kd树"><a href="#搜索kd树" class="headerlink" title="搜索kd树"></a>搜索kd树</h5><p>输入：已构造的kd树，目标点x；<br>输出：x的最近邻</p>
+<ul>
+<li>（1）在kd树中找到包含目标的x的叶节点：从根节点出发，递归地向下访问kd树。若目标点x当前维的坐标小于切分点的坐标，则移动到左子节点，否则移动到右子节点。直到子节点为叶节点为止。</li>
+<li>（2）以此叶节点为“当前最近点”</li>
+<li>（3）递归地向上回退，在每个节点进行下列操作：</li>
+<li>（a）如果该节点保存的实例点比当前最近点距离目标更近，则以该实例点为“当前最近点”；</li>
+<li>（b）当前最近点一定存在于该节点一个子节点对应的区域。检查该子节点的父节点的另一个子节点对应的区域是否有更近的点。具体来说，是检查另一子节点对应的区域是否以目标点为球心，以目标点与“当前最近点”间的距离为半径的球体相交。<br>  &emsp;如果相交，可能在另一个子节点对应的区域内存在距目标点更近的点，移动到另一个子节点。接着，递归的进行最近邻搜索；<br>   &emsp;如果不相交，向上回退。</li>
+<li>（4）当回退到根节点是，搜索结束。最后的“当前最近点”即x的最近邻点。</li>
+</ul>
+<p>&emsp;&emsp;kd树更适用于训练实例远大于空间维数时的k近邻搜索。当空间维数接近训练实例数时，效率会迅速下降，几乎接近线性扫描。</p>
+<h3 id="python实现"><a href="#python实现" class="headerlink" title="python实现"></a>python实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">import operator</span><br><span class="line"></span><br><span class="line">def Dataset():</span><br><span class="line">    np.random.seed(13)</span><br><span class="line">    dataList=np.random.randint(1,10,8)</span><br><span class="line">    print(&apos;dataList&apos;,dataList)</span><br><span class="line">    data=np.array(dataList).reshape(4,2)</span><br><span class="line">    print(&apos;data&apos;,data)</span><br><span class="line">    lables=[&apos;A&apos;,&apos;B&apos;,&apos;A&apos;,&apos;B&apos;]</span><br><span class="line">    return data,lables</span><br><span class="line">def classfy(target,dataset,labels,k):</span><br><span class="line">    dataSize=dataset.shape[0]</span><br><span class="line"></span><br><span class="line">    #compute Euclidean distance=sqrt(sum of all the difference between tartget and dataSet)</span><br><span class="line">    minus=np.tile(target,(dataSize,1))-dataset</span><br><span class="line">    temp=minus**2</span><br><span class="line">    temp1=temp.sum(axis=1) # sum of each row</span><br><span class="line">    distance=temp1**0.5</span><br><span class="line"></span><br><span class="line">    sortedDistIdx=distance.argsort()# return the indcies of sorted ele,emts</span><br><span class="line">    count=&#123;&#125;</span><br><span class="line">    #count labels</span><br><span class="line">    for i in range(k):</span><br><span class="line">        theLabel=labels[sortedDistIdx[i]]</span><br><span class="line">        print(&apos;label=&#123;&#125;,i=&#123;&#125;&apos;.format(theLabel,i))</span><br><span class="line">        count[theLabel]=count.get(theLabel,0)+1</span><br><span class="line"></span><br><span class="line">    sortedCount=sorted(count.items(),key=operator.itemgetter(1),reverse=True)</span><br><span class="line">    return sortedCount[0][0]</span><br><span class="line"></span><br><span class="line">data,label=Dataset()</span><br><span class="line">target=[3,2]</span><br><span class="line"></span><br><span class="line">className=classfy(target,data,label,3)</span><br><span class="line">print(&apos;target is class:&apos;,className)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ML-notes/" rel="tag"># ML notes</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/22/kannsou/" rel="next" title="kannsou">
+                <i class="fa fa-chevron-left"></i> kannsou
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/01/ML1-Perceptron/" rel="prev" title="ML1-Perceptron">
+                ML1-Perceptron <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">汤圆宝</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">Artikel</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">Tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法"><span class="nav-number">2.</span> <span class="nav-text">算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#k近邻模型"><span class="nav-number">2.1.</span> <span class="nav-text">k近邻模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#模型"><span class="nav-number">2.2.</span> <span class="nav-text">模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#距离度量"><span class="nav-number">2.3.</span> <span class="nav-text">距离度量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#k值的选择"><span class="nav-number">2.4.</span> <span class="nav-text">k值的选择</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分类决策规则"><span class="nav-number">2.5.</span> <span class="nav-text">分类决策规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#k近邻法的实现：kd树"><span class="nav-number">2.6.</span> <span class="nav-text">k近邻法的实现：kd树</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#构造kd树"><span class="nav-number">2.6.1.</span> <span class="nav-text">构造kd树</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#搜索kd树"><span class="nav-number">2.6.2.</span> <span class="nav-text">搜索kd树</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python实现"><span class="nav-number">3.</span> <span class="nav-text">python实现</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">汤圆宝</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>
