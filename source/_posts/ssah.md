@@ -9,7 +9,7 @@ mathjax: true
 #背景
 
 ​	跨媒体检索主要有两类办法：1.同时学习common和modality-specific特征，将不同模态用一个共享层，对他们的关系进行建模。2.two-stage framework：先对各模态提取特征，然后构建低纬度的公共表示空间。（Cross-modal Retrieval with Correspondence Autoencoder）
-
+<!-- more -->
 ​	高纬的modality-specific 特征有助于bridge 模态gap，因此如何encourage 更多丰富的语义关系，构建更准确的模态关系，这对于在实际的应用中，达到令人满意的性能变得十分重要。（？？？之前在上一篇论文中提到，对于使用方法1来说，有利于检索的是公共语义信息，不太有利的是modality-specific特征，因为模型会把后者也进行学习，这对于模型来说是harmful！！！哦，因为本篇论文的思想是单独提取出各模态特征，采用的是方法二）
 
 问题：如何提升跨模态检索的准确率，以及规避/减小模态鸿沟
