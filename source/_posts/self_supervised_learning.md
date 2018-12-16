@@ -2,7 +2,7 @@
 title: Self-supervised Learning
 mathjax: true
 date: 2018-12-16 20:39:45
-tags: cross-modal
+tags: 
 ---
 
 ### Motivation

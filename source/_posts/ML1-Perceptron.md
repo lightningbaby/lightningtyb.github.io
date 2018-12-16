@@ -1,7 +1,7 @@
 ---
 title: ML1-Perceptron
 date: 2018-04-01 18:20:02
-tags:
+tags: machine learing
 mathjax: true
 ---
 # 感知机

@@ -1,7 +1,7 @@
 ---
 title: SSAH_reading notes
 date: 2018-12-16 20:16:34
-tags:
+tags: cross-modal
 mathjax: true
 ---
 有待进一步了解：semantic network，self-supervised learning，公共语义空间,multi-label annotations,跨媒体哈希

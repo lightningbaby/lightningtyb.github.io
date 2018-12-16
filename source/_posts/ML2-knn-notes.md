@@ -1,7 +1,7 @@
 ---
 title: ML2-knn notes
 date: 2018-04-01 17:17:44
-tags: ML notes
+tags: machine learning
 mathjax: true
 ---
 ### 概述

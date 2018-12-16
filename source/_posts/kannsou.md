@@ -2,7 +2,7 @@
 layout: poetry
 title: kannsou
 date: 2018-03-22 19:40:15
-tags:
+tags: nothing
 ---
 今年の報告さすかに遅いですね。
 でも、たとえそれでも、なんか何も書けない。

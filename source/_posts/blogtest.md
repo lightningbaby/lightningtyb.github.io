@@ -1,7 +1,7 @@
 ---
 title: blogtest
 date: 2018-03-22 16:24:56
-tags:
+tags: nothing
 ---
 不得不说，对于一个半吊子的程序员，安装并成功部署hexo是在是太难了。
 <!-- more -->

@@ -1,7 +1,7 @@
 ---
 title: TF1-MNIST
 date: 2018-04-01 18:24:02
-tags:
+tags: tensorflow
 mathjax: true
 ---
 MNIST是一个计算机视觉数据集，包含各种手写数字图片，也包含每一张图片的标签（即，该数字是几）。
