@@ -101,7 +101,7 @@
 <meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwly1fy8uu2e5zej30ky09qabs.jpg">
 <meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwly1fy8uu74rr5j30ks08c3zo.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fy8uuaoafcj30hi048mxi.jpg">
-<meta property="og:updated_time" content="2018-12-16T12:55:58.605Z">
+<meta property="og:updated_time" content="2018-12-16T12:59:10.591Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SSAH_reading notes">
 <meta name="twitter:description" content="有待进一步了解：semantic network，self-supervised learning，公共语义空间,multi-label annotations,跨媒体哈希 背景​    跨媒体检索主要有两类办法：1.同时学习common和modality-specific特征，将不同模态用一个共享层，对他们的关系进行建模。2.two-stage framework：先对各模态提取特征，然后构建低">
@@ -430,13 +430,13 @@ min_{B^l,\theta ^l,\hat L_l}=& \alpha J_1+\gamma J_2+\eta J_3 +\beta J4 \tag{1}\
 </li>
 <li><p>输出：0/1（判断标签来自ImgNet或TxtNet时输出0，来自LabNet输出为1）</p>
 </li>
-<li><p>在公共空间分配给语义特征的模态标签表示为$Y=    {y<em>i}^{3\times n}</em>{i=1},y_i\in{0,1}$</p>
+<li><p>在公共空间分配给语义特征的模态标签表示为$ Y=    {y<em>i}^{3\times n}</em>{i=1},y_i\in{0,1} $</p>
 <ul>
-<li>模态标签：$Y^l={y<em>i^l}^{n}</em>{i=1},y_i^l=1$</li>
-<li>图像和文本的模态标签：$Y^{v,t}={y<em>i^{v,t}}^{n}</em>{i=1},y_i^{v,t}=0$</li>
+<li>模态标签：$ Y^l={y<em>i^l}^{n}</em>{i=1},y_i^l=1 ​$</li>
+<li>图像和文本的模态标签：$ Y^{v,t}={y<em>i^{v,t}}^{n}</em>{i=1},y_i^{v,t}=0 $</li>
 </ul>
 </li>
-<li><p>目标函数：$min<em>{\theta ^{*,l}</em>{adv}}L^{<em>,l}<em>{adv}=\sum ^{2\times n}</em>{i=1}||D^{</em>,l}(x^{<em>,l}_{i})-y^{</em>,l}<em>{i}||^2_2,<em>=v,t$，$x^{</em>,l}</em>{i}$是公共空间的语义特征，$y^{*,l}_{i}$是判别值，相当于一个二元分类器</p>
+<li><p>目标函数：$ min<em>{\theta ^{*,l}</em>{adv}}L^{<em>,l}<em>{adv}=\sum ^{2\times n}</em>{i=1}||D^{</em>,l}(x^{<em>,l}_{i})-y^{</em>,l}<em>{i}||^2_2,<em>=v,t $，$x^{</em>,l}</em>{i}$是公共空间的语义特征，$y^{*,l}_{i}$是判别值，相当于一个二元分类器</p>
 </li>
 </ul>
 <h3 id="训练过程的伪代码"><a href="#训练过程的伪代码" class="headerlink" title="训练过程的伪代码"></a><strong>训练过程的伪代码</strong></h3><p><img src="https://ws1.sinaimg.cn/large/006tNbRwly1fy8utjtnfyj30zk0n6wii.jpg" style="zoom:50%"></p>
