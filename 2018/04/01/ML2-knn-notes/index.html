@@ -6,10 +6,10 @@
 
 
 <html class="theme-next muse use-motion" lang="">
-<head>
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
 
 
@@ -20,8 +20,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -40,7 +40,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -48,9 +48,9 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="ML notes," />
+  <meta name="keywords" content="ML notes,">
 
 
 
@@ -86,9 +86,10 @@
 <meta property="og:url" content="http://yoursite.com/2018/04/01/ML2-knn-notes/index.html">
 <meta property="og:site_name" content="Lightningbaby">
 <meta property="og:description" content="概述&amp;emsp;&amp;emsp;k近邻法（k-nearest neighbor,k-NN）是一种基本分类与回归方法。&amp;emsp;&amp;emsp;给定一个训练数据集，对新的输入实例，在训练数据集中找到与该实例最邻近的k个实例，这k个实例的多数属于某个类，就把该输入实例分为这个类。">
+<meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/images/features_zone_classfy.png">
 <meta property="og:image" content="http://yoursite.com/images/kd_tree.png">
-<meta property="og:updated_time" content="2018-04-01T10:16:24.087Z">
+<meta property="og:updated_time" content="2018-04-01T10:16:24.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ML2-knn notes">
 <meta name="twitter:description" content="概述&amp;emsp;&amp;emsp;k近邻法（k-nearest neighbor,k-NN）是一种基本分类与回归方法。&amp;emsp;&amp;emsp;给定一个训练数据集，对新的输入实例，在训练数据集中找到与该实例最邻近的k个实例，这k个实例的多数属于某个类，就把该输入实例分为这个类。">
@@ -122,7 +123,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/04/01/ML2-knn-notes/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/04/01/ML2-knn-notes/">
 
 
 
@@ -140,7 +141,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="">
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
 
   
   
@@ -150,13 +151,13 @@
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta ">
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">Lightningbaby</span>
         <span class="logo-line-after"><i></i></span>
@@ -186,9 +187,9 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
-            Startseite
+            Home
           </a>
         </li>
       
@@ -196,9 +197,9 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
-            Archiv
+            Archives
           </a>
         </li>
       
@@ -230,20 +231,20 @@
   
   
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
   
   
   
   <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/01/ML2-knn-notes/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="汤圆宝">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Lightningbaby">
     </span>
 
@@ -262,7 +263,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-01T17:17:44+08:00">
                 2018-04-01
@@ -305,14 +306,14 @@
         <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>&emsp;&emsp;k近邻法（k-nearest neighbor,k-NN）是一种基本分类与回归方法。<br>&emsp;&emsp;给定一个训练数据集，对新的输入实例，在训练数据集中找到与该实例最邻近的k个实例，这k个实例的多数属于某个类，就把该输入实例分为这个类。<br><a id="more"></a></p>
 <h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h3><p> 输入：训练数据集</p>
 <script type="math/tex; mode=display">
-T=\{(x_1,y_1),(x_2,y_2),..,(x_N,y_N)\}</script><p> 其中，$x_i \in X \subseteq R^n$为实例的特征向量，$y_i \in Y=\{c_1,c_2,…,c_k\}$为实例的类别，$i=1,2,…,N$；实例特征向量x;<br> 输出：实例$x$所属的类$y$<br> （1）根据给定的距离度量，在训练集T中寻找出距离x最近的k个点，涵盖这k的点的领域记作$N_k(x)$；<br> （2）在$N_k(x)$中根据分类决策规则（eg:多数表决），确定x所属的类别y：<br>  \begin{equation}<br>y=arg \max_{c_j} \sum_{x_i \in N_k(x)} I(y_i=c_i), i=1,2,…,K<br> \end{equation}<br> 其中，$I$为指示函数，即当$y_i=c_i时I为1，否则I为0$。<br> 特殊情况是$k=1$的情形，称为最近邻算法。</p>
+T=\{(x_1,y_1),(x_2,y_2),..,(x_N,y_N)\}</script><p> 其中，$x<em>i \in X \subseteq R^n$为实例的特征向量，$y_i \in Y={c_1,c_2,…,c_k}$为实例的类别，$i=1,2,…,N$；实例特征向量x;<br> 输出：实例$x$所属的类$y$<br> （1）根据给定的距离度量，在训练集T中寻找出距离x最近的k个点，涵盖这k的点的领域记作$N_k(x)$；<br> （2）在$N_k(x)$中根据分类决策规则（eg:多数表决），确定x所属的类别y：<br>  \begin{equation}<br>y=arg \max</em>{c<em>j} \sum</em>{x_i \in N_k(x)} I(y_i=c_i), i=1,2,…,K<br> \end{equation}<br> 其中，$I$为指示函数，即当$y_i=c_i时I为1，否则I为0$。<br> 特殊情况是$k=1$的情形，称为最近邻算法。</p>
 <h4 id="k近邻模型"><a href="#k近邻模型" class="headerlink" title="k近邻模型"></a>k近邻模型</h4><p> &emsp;&emsp;k近邻法的模型对应于特征空间的划分。模型由三个基本要素—距离度量、k值的选择和分类决策规则决定。</p>
 <h4 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h4><p>&emsp;&emsp;当上述三个要素确定后，对于任何一个新的输入实例，所属的类唯一地确定。<br>&emsp;&emsp;特征空间中，对每个训练实例点$x_i$，距离该点比其他店更近的所有点组成的一个区域，叫做单元（cell）。每个训练实例点拥有一个单元，所有训练实例点的单元构成对特征空间的一个划分。最近邻法将实例$x_i$的类$y_i$作为其单元中所有点的类标记（class label）。则每个单元的实例点的类别是确定的。</p>
-<h4 id="距离度量"><a href="#距离度量" class="headerlink" title="距离度量"></a>距离度量</h4><p>&emsp;&emsp;特征空间中两个实例点的距离是这两个实例点相似度的反映。k近邻模型的特征空间一般是n维实数向量空间$R^n$。使用的距离是欧式距离，也可以是其他距离，比如更一般的$L_P$距离（$L_P$ distance）或Minkowski距离。<br>&emsp;&emsp;设特征空间X是n维实数向量空间$R^n$，$x_i,x_j \in X,<br>x_i=(x_i^{(1)},x_i^{(2)},…,x_i^{(n)})^T$，<br>$x_j=(x_j^{(1)},x_j^{(2)},…,x_j^{(n)})^T$，$x_i,x_j的L_P距离定义为：$<br>  \begin{equation}<br>L_P(x_i,x_j)=\lgroup \sum_{l=1}^n |x_i^{(l)}-x_j^{(l)}|^p\rgroup ^{\frac{1}{p}}<br> \end{equation}<br> 当$p \ge 1。当p=2$时，称为Euclidean distance，即<br>  \begin{equation}<br>L_2(x_i,x_j)=\lgroup \sum_{l=1}^n |x_i^{(l)}-x_j^{(l)}|^2\rgroup ^{\frac{1}{2}}<br> \end{equation}<br> 当$p =1$时，称为Manhattan distance，即<br>  \begin{equation}<br>L_1(x_i,x_j)= \sum_{l=1}^n |x_i^{(l)}-x_j^{(l)}|<br> \end{equation}<br> 当$p=\infty$时，是各个坐标距离的最大值，即<br>   \begin{equation}<br>L_\infty(x_i,x_j)= \max_{l}|x_i^{(l)}-x_j^{(l)}|<br> \end{equation} </p>
+<h4 id="距离度量"><a href="#距离度量" class="headerlink" title="距离度量"></a>距离度量</h4><p>&emsp;&emsp;特征空间中两个实例点的距离是这两个实例点相似度的反映。k近邻模型的特征空间一般是n维实数向量空间$R^n$。使用的距离是欧式距离，也可以是其他距离，比如更一般的$L<em>P$距离（$L_P$ distance）或Minkowski距离。<br>&emsp;&emsp;设特征空间X是n维实数向量空间$R^n$，$x_i,x_j \in X,<br>x_i=(x_i^{(1)},x_i^{(2)},…,x_i^{(n)})^T$，<br>$x_j=(x_j^{(1)},x_j^{(2)},…,x_j^{(n)})^T$，$x_i,x_j的L_P距离定义为：$<br>  \begin{equation}<br>L_P(x_i,x_j)=\lgroup \sum</em>{l=1}^n |x<em>i^{(l)}-x_j^{(l)}|^p\rgroup ^{\frac{1}{p}}<br> \end{equation}<br> 当$p \ge 1。当p=2$时，称为Euclidean distance，即<br>  \begin{equation}<br>L_2(x_i,x_j)=\lgroup \sum</em>{l=1}^n |x<em>i^{(l)}-x_j^{(l)}|^2\rgroup ^{\frac{1}{2}}<br> \end{equation}<br> 当$p =1$时，称为Manhattan distance，即<br>  \begin{equation}<br>L_1(x_i,x_j)= \sum</em>{l=1}^n |x<em>i^{(l)}-x_j^{(l)}|<br> \end{equation}<br> 当$p=\infty$时，是各个坐标距离的最大值，即<br>   \begin{equation}<br>L</em>\infty(x<em>i,x_j)= \max</em>{l}|x_i^{(l)}-x_j^{(l)}|<br> \end{equation} </p>
 <h4 id="k值的选择"><a href="#k值的选择" class="headerlink" title="k值的选择"></a>k值的选择</h4><p>&emsp;&emsp;k值的选择会对k近邻法的结果产生重大影响。<br>&emsp;&emsp;如果选择较小的k值，相当于用较小的邻域中的训练实例进行预测，学习的近似误差（approximation error）会减小，只有与输入实例较近的（相似的）训练实例才会对预测结果起作用。但缺点是学习的估计误差（estimation error）会增大，预测结果会对近邻的实例点非常敏感。k值的减小意味着整体模型变得负责，容易发生过拟合。<br>&emsp;&emsp;如果k值较大，相当于用较大邻域里的训练实例进行预测。优点是可以减少学习的估计误差，但缺点就是会增大近似误差。这是与输入实例较远的（不太相似）的训练实例也会对预测起作用，是预测发生错误。k值的增大意味着模型变得更简单。<br>&emsp;&emsp;如果k=N，则将输入实例预测为训练实例中最多的类。即模型过于简单，完全忽略了训练实例中的大量有用信息，不可取。<br>&emsp;&emsp;实际应用中，k值一般去一个比较小的数值。通常常采用交叉验证法（将原始数据(dataset)进行分组,一部分做为训练集(train set),另一部分做为验证集(validation set or test set),首先用训练集对分类器进行训练,再利用验证集来测试训练得到的模型(model),以此来做为评价分类器的性能指标）来选取最优值。</p>
 <h4 id="分类决策规则"><a href="#分类决策规则" class="headerlink" title="分类决策规则"></a>分类决策规则</h4><p>&emsp;&emsp;多用是<strong>多数表决</strong>，即由输入实例的k个近邻的训练实例中的多数类决定输入实例的类。多数表决的规则等价于经验风险最小化。</p>
 <h4 id="k近邻法的实现：kd树"><a href="#k近邻法的实现：kd树" class="headerlink" title="k近邻法的实现：kd树"></a>k近邻法的实现：kd树</h4><p>&emsp;&emsp;实现的过程中，主要的问题是如何对训练数据进行快速k近邻搜索。这在特征空间的维数大，及训练数据容量大时尤其必要。<br>&emsp;&emsp;最简单的方法是线性扫描（linear scan）。需要计算输入实例与每一个训练实例的距离。当训练集很大时，计算非常耗时，不可取。<br>&emsp;&emsp;为了改善，可以使用特殊的结构存储训练数据，比如kd树（kd tree）。</p>
-<h5 id="构造kd树"><a href="#构造kd树" class="headerlink" title="构造kd树"></a>构造kd树</h5><p><strong>例：</strong>给定一个二维空间的数据集：<br>\begin{equation}<br>T=\{(2,3)^T,(5,4)^T,(9,6)^T,(4,7)^T,(8,1)^T,(7,2)^T\}<br>\end{equation}<br>构造一个平衡kd树。<br><strong>解：</strong></p>
+<h5 id="构造kd树"><a href="#构造kd树" class="headerlink" title="构造kd树"></a>构造kd树</h5><p><strong>例：</strong>给定一个二维空间的数据集：<br>\begin{equation}<br>T={(2,3)^T,(5,4)^T,(9,6)^T,(4,7)^T,(8,1)^T,(7,2)^T}<br>\end{equation}<br>构造一个平衡kd树。<br><strong>解：</strong></p>
 <ul>
 <li>根节点对应包含数据集T的矩形，选择$x^{(1)}$轴，6个数据点的$x^{(1)}$坐标中位数是7，以平面$x^{(1)}=7$将空分为左右两个子矩形（子节点）；</li>
 <li>左矩形以$x^{(2)}=4$分为两个子矩形，右矩形以$x^{(2)}=6$分为两个子矩形；<br>如此递归，最后得到如下图所示的特征空间划分和kd树。</li>
@@ -369,8 +370,8 @@ T=\{(x_1,y_1),(x_2,y_2),..,(x_N,y_N)\}</script><p> 其中，$x_i \in X \subseteq
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/04/01/ML1-Perceptron/" rel="prev" title="ML1-Perceptron">
-                ML1-Perceptron <i class="fa fa-chevron-right"></i>
+              <a href="/2018/04/01/hello-world/" rel="prev" title="Hello World">
+                Hello World <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -425,17 +426,17 @@ T=\{(x_1,y_1),(x_2,y_2),..,(x_N,y_N)\}</script><p> 其中，$x_i \in X \subseteq
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Inhaltsverzeichnis
+            Table of Contents
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Übersicht
+            Overview
           </li>
         </ul>
       
 
       <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
               <p class="site-author-name" itemprop="name">汤圆宝</p>
               <p class="site-description motion-element" itemprop="description"></p>
@@ -448,8 +449,8 @@ T=\{(x_1,y_1),(x_2,y_2),..,(x_N,y_N)\}</script><p> 其中，$x_i \in X \subseteq
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">6</span>
-                  <span class="site-state-item-name">Artikel</span>
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">posts</span>
                 </a>
               </div>
             
@@ -462,7 +463,7 @@ T=\{(x_1,y_1),(x_2,y_2),..,(x_N,y_N)\}</script><p> 其中，$x_i \in X \subseteq
               <div class="site-state-item site-state-tags">
                 
                   <span class="site-state-item-count">1</span>
-                  <span class="site-state-item-name">Tags</span>
+                  <span class="site-state-item-name">tags</span>
                 
               </div>
             
@@ -524,7 +525,7 @@ T=\{(x_1,y_1),(x_2,y_2),..,(x_N,y_N)\}</script><p> 其中，$x_i \in X \subseteq
 </div>
 
 
-  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
 
 
 
